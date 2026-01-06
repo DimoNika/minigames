@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://s8lo0ktwlng1" path="res://scenes/blocks/block1m.tscn" id="1_ras4o"]
 [ext_resource type="PackedScene" uid="uid://g58u688yiacf" path="res://scenes/blocks/block_platform.tscn" id="2_58uta"]
-[ext_resource type="PackedScene" uid="uid://dbwn7jsx70a7e" path="res://player.tscn" id="3_uxu58"]
+[ext_resource type="PackedScene" uid="uid://dbwn7jsx70a7e" path="res://scenes/player.tscn" id="3_uxu58"]
 
 [node name="World" type="Node3D"]
 
