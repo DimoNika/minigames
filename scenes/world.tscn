@@ -1,18 +1,36 @@
 [gd_scene load_steps=4 format=3 uid="uid://b5jmefsl7yvei"]
 
+[ext_resource type="Script" uid="uid://eypotdkhred3" path="res://scripts/world.gd" id="1_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://s8lo0ktwlng1" path="res://scenes/blocks/block1m.tscn" id="1_ras4o"]
 [ext_resource type="PackedScene" uid="uid://g58u688yiacf" path="res://scenes/blocks/block_platform.tscn" id="2_58uta"]
-[ext_resource type="PackedScene" uid="uid://dbwn7jsx70a7e" path="res://scenes/player.tscn" id="3_uxu58"]
 
 [node name="World" type="Node3D"]
+script = ExtResource("1_4wyf3")
 
 [node name="Block" parent="." instance=ExtResource("1_ras4o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4598045, 1, 5.5181923)
 
 [node name="Block1m" parent="." instance=ExtResource("2_58uta")]
-
-[node name="Player" parent="." instance=ExtResource("3_uxu58")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9043674, 3.106226, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.93919325, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.1792658, 0.98380065, 0, -0.98380065, -0.1792658, 0, 21.688526, -6.1823673)
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://dbwn7jsx70a7e")
+spawn_path = NodePath("..")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Host" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Host"
+
+[node name="Join" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Join"
+
+[connection signal="pressed" from="VBoxContainer/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="VBoxContainer/Join" to="." method="_on_join_pressed"]

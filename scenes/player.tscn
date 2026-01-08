@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbwn7jsx70a7e"]
+[gd_scene load_steps=6 format=3 uid="uid://dbwn7jsx70a7e"]
 
 [ext_resource type="Script" uid="uid://bs40148m2m11v" path="res://scripts/character_body_3d.gd" id="1_3vyb7"]
 
@@ -6,19 +6,43 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_3vyb7"]
 
-[node name="Player" type="Node3D"]
+[sub_resource type="BoxMesh" id="BoxMesh_3vyb7"]
+size = Vector3(0.12, 0.155, 0.695)
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_3vyb7"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Neck:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
 script = ExtResource("1_3vyb7")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_u8vuu")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_3vyb7")
 
-[node name="Neck" type="Node3D" parent="CharacterBody3D"]
+[node name="Neck" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5711956, 0)
 
-[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Neck"]
+[node name="Camera3D" type="Camera3D" parent="Neck"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Neck"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00941655, 0.39949262, -0.44436672)
+mesh = SubResource("BoxMesh_3vyb7")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 101.0
+offset_top = 9.0
+offset_right = 141.0
+offset_bottom = 32.0
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_3vyb7")
